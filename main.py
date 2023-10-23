@@ -3,4 +3,4 @@ Project akhir
 """
 
 
-print("hello world")
+print("Testing 2")
