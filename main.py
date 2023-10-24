@@ -1,7 +1,5 @@
 import os
-"""
-Project akhir
-"""
+from tabulate import tabulate
 
 admin ={
     "admin":"admin"
@@ -9,6 +7,14 @@ admin ={
 user ={
     "user":"user"
 }
+
+table = [["MTK",15000,5],
+         ["BAHASA INDONESIA",15000,2],
+         ["PANCASILA",15000,4],
+         ["KARTINI",15000,5]]
+
+header = ["ID","Judul buku","Harga Rp","Jumlah tersedia"]
+
 
 
 def main():
@@ -83,9 +89,9 @@ Log out     >> 5
         pilih = input("Pilih Menu : ")    
         os.system('cls')
         if  pilih == "1":
-            print("1")
+            Display()
         elif pilih == "2":
-            print("1")
+            Create()
         elif pilih == "3":
             print("1")
         elif pilih == "4":
@@ -95,6 +101,41 @@ Log out     >> 5
         else:
             print("Noted : Pilih angka yang terdapat pada menu !")
 
+def BackToMenuAdmin():
+    while True:
+        pilih = input("Kembali ke menu (y/n)? : ")
+        os.system('cls')
+        if pilih == "y":
+            MenuAdmin()
+        elif pilih =="n":
+            break
+        else:
+            print("Pilih input y atua n saja !\n")
+
+def Display():
+    while True:
+        print(tabulate(table,headers=header,showindex="always",tablefmt="heavy_grid"))
+        BackToMenuAdmin()
+
+def Create():
+    while True:
+        JumlahJudul = int(input("Masukan jumlah judul buku yang mau di tambah : "))
+        angka = 0
+        for i in range(JumlahJudul):
+            angka += 1
+            Judul   = input(f"Masukan judul buku ke {angka} : ")
+            Harga   = int(input("Masukan harga buku : Rp"))
+            Jumlah  = int(input("Masukan jumlah buku : "))
+            os.system('cls')
+            tambah = [Judul,Harga,Jumlah]
+            table.append(tambah)
+        print("Data buku berhasil di tambahkan! \n")
+        BackToMenuAdmin()
+
+
+
+
+
+
 if __name__ == "__main__":
-    os.system('cls')
     main()
