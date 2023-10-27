@@ -1,67 +1,76 @@
 import os
-from tabulate import tabulate
+# from tabulate import tabulate
 
-admin ={
-    "admin":"admin"
-}
-user ={
-    "user":"user"
+Login = {
+    "admin" : {"admin" : "admin"},
+    "user"  : {"user"  : "user"}
 }
 
+# Database = {
+#     "Merk"  : {"Samasung"   : [["Samsung J2 Prime",2,12,200000]],
+#                "Infinix"    : [["Infinix Hot 11",6,128,24000000]] }
+# }
+# database = [{"Samsung" : [{"nama"   : "Samsung Galaxy",
+#                         "Harga"     : 2000000},
+#                         {"nama"     : "Samsung J2 Prime",
+#                         "Harga"     : 2000000}]},
+#             {"Infinix": [{"nama"    : "Infinix Galaxy",
+#                         "Harga"     : 2000000}]} 
+#             ]
+# for data in database:
+#     print('\n')
+#     for i,j in data.items():
+#         print(i)
+#         for hp in j:
+#             for key,data_hp in hp.items():
+#                 print(data_hp)
 
-def main():
+def Auth_login():
+    gagal = 0
+    while gagal < 3:
+        print("Menu Login \n")
+        username = input("Username : ")
+        password = input("password : ")
+        os.system('clear')
+        if username in Login["admin"] and password == Login["admin"][username]:
+            print("yes admin")
+        elif username in Login["user"] and password == Login["user"][username]:
+            print("yes user")
+        else:
+            gagal += 1
+            print(f"noted :  Login gagal ke {gagal} , jika gagal login 3x maka akan di keluarkan ke menu awal\n")
+
+def Registrasi_user():
+    print("Silahkan buat akun baru anda \n")
+    username = input("Username : ")
+    password = input("password : ")
+    Login["user"].update({username : password})
+
+def Show_menu_awal():
     while True:
-        os.system('cls')
+        os.system('clear')
         print("""
-Selamat Datang di E-Perpustakaan
 
-Menu : 
-
-Login Admin >> 1
-Login User  >> 2
-Registrasi  >> 3
-Quit        >> 4
+ Toko Handphone                   
+     Menu : 
+================
+              
+Login       >> 1
+Registrasi  >> 2
+Exit        >> 3
 
 """)
         pilih = input("Pilih Menu : ")
-        os.system('cls')
+        os.system('clear')
         if  pilih == "1":
-            authAdmin()
+            Auth_login()
         elif pilih == "2":
-            authUser()
+            Registrasi_user()
         elif pilih == "3":
-            Registrasi()
-        elif pilih == "4":
             exit()
         else:
             print("Noted : Pilih angka yang terdapat pada menu !")
 
-def Auth_admin():
-    gagal = 0
-    while gagal < 3:
-        username = input("Username : ")
-        password = input("Password : ")
-        os.system('cls')
-        if username in admin and password == admin[username]:
-            MenuAdmin()
-        else:
-            gagal += 1
-            print(f"Login gagal ke {gagal}\nNoted : Batas login 3x")
 
-def Auth_user():
-    gagal = 0
-    while gagal < 3:
-        username = input("Username : ")
-        password = input("Password : ")
-        os.system('cls')
-        if username in user and password == user[username]:
-            print("Hai")
-        else:
-            gagal += 1
-            print(f"Login gagal ke {gagal}\nNoted : Batas login 3x")
-
-def Registrasi():
-    username = input("Username baru : ")
-    password = input("Password : ")
-    os.system('cls')
-    user.update({username:password})
+if __name__ == "__main__":
+    Show_menu_awal()
