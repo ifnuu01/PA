@@ -1,5 +1,5 @@
 import os
-# from tabulate import tabulate
+from tabulate import tabulate
 
 Login = {
     "admin" : {"admin" : "admin"},
@@ -67,10 +67,13 @@ Exit        >> 3
         elif pilih == "2":
             Registrasi_user()
         elif pilih == "3":
+            print("Terima kasih telah berkunjung")
             exit()
         else:
             print("Noted : Pilih angka yang terdapat pada menu !")
 
 
 if __name__ == "__main__":
+    os.system('pip install tabulate')
+    os.system('clear')
     Show_menu_awal()
