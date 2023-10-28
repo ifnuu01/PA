@@ -1,22 +1,9 @@
 import os
+from data import Login,Database,header
 from tabulate import tabulate
-
-
-Login = {
-    "user"  : "user",
-}
-
-
-Database = {"Samasung"    : [["Samsung J2 Prime",2,16,"Snapdragon 888",200000],["Samsung Galaxy note",8,256,"Snapdragon 729",4500000]],
-            "Infinix"     : [["Infinix Hot 11",6,128,"MediaTek Helio G88",24000000]]
-}
-
-header = ["ID","Type HandPhone","Ram (Gb)","Storage (Gb)","Processor","Harga (Rp)"]
-
 
 def Clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
-
 
 def Auth_role():
     gagal = 0
@@ -145,10 +132,7 @@ def Show_type_infinix():
     Back_to_menu()
     Clear_screen()
 
-
-Read_handphone()
-
-# if __name__ == "__main__":
-#     os.system('pip install tabulate')
-#     Clear_screen()
-#     Show_menu_awal()
+if __name__ == "__main__":
+    os.system('pip install tabulate')
+    Clear_screen()
+    Show_menu_awal()
