@@ -2,15 +2,14 @@ import os
 from tabulate import tabulate
 
 Login = {
-    "admin" : {"admin" : "admin"},
-    "user"  : {"user"  : "user"}
+    "user"  : "user",
 }
 
 Database = {"Samasung"    : [["Samsung J2 Prime",2,16,"Snapdragon 888",200000],["Samsung Galaxy note",8,256,"Snapdragon 729",4500000]],
             "Infinix"     : [["Infinix Hot 11",6,128,"MediaTek Helio G88",24000000]]
 }
 
-header = ["ID","Type HandPhone","Ram (Gb)","Storage (Gb)","Processor","Harga (Rp)"]
+
 
 def Clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -22,9 +21,9 @@ def Auth_role():
         username = input("Username : ")
         password = input("password : ")
         Clear_screen()
-        if username in Login["admin"] and password == Login["admin"][username]:
+        if username == "admin" and password == "admin":
             print("yes admin")
-        elif username in Login["user"] and password == Login["user"][username]:
+        elif username in Login and password == Login[username]:
             print("yes  user")
         else:
             gagal += 1
@@ -34,11 +33,10 @@ def Registrasi_user():
     print("Silahkan buat akun baru anda \n")
     username = input("Username : ")
     password = input("password : ")
-    Login["user"].update({username : password})
+    Login.update({username : password})
 
 def Show_menu_awal():
     while True:
-        Clear_screen()
         print("""
 
  Toko Handphone                   
