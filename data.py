@@ -10,3 +10,6 @@ Database = {"Samsung"    : [["Samsung J2 Prime",2,16,"Snapdragon 888",200000],
 }
 
 header = ["ID","Type HandPhone","Ram (Gb)","Storage (Gb)","Processor","Harga (Rp)"]
+
+Samsung = Database["Samsung"]
+Infinix = Database["Infinix"]
