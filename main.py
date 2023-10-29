@@ -112,7 +112,7 @@ Logout           >> 5
             edit_handphone()
         #Jika inputan pilih bernilai str 4 maka akan masuk ke Fungsi Delete_handphone
         elif pilih == "4":
-            print("d")
+            delete_handphone()
         #Jika inputan pilih bernilai str 5 maka akan masuk ke Fungsi show_menu_awal
         elif pilih == "5":
             show_menu_awal()
@@ -201,7 +201,7 @@ def update_type(brand,name_brand):
 def edit_handphone():
     while True:
         menu_read()
-        Brand = input("Pilih brand yang mau diedit : ")
+        Brand = input("Pilih brand dari type handphone yang mau di edit : ")
         clear_screen()
         if Brand == "1":
             edit_type(Samsung,"Samsung")
@@ -212,10 +212,10 @@ def edit_handphone():
         else:
             print("Noted : Pilih angka yang terdapat pada menu !")
 
-def input_edit(brand,type_brand):
+def edit_type(brand,name_brand):
     while True:
         try:
-            print(type_brand)
+            print(show_type(brand,name_brand))
             pilih = int(input("Pilih ID yang mau di edit : "))
             clear_screen()
             if pilih in [i+1 for i in range(len(brand))]:
@@ -224,16 +224,43 @@ def input_edit(brand,type_brand):
                 edit = input_update()
                 clear_screen()
                 print("Noted : data berhasil di edit")
-                return edit , pilih
+                brand[pilih-1] = edit
+                return
             else:
                 print("Noted : ID yang anda inputkan tidak ada\n")
         except ValueError:
             clear_screen()
             print("Noted : ID yang anda inputkan tidak ada\n")
 
-def edit_type(brand,name_brand):
-    Edit , Pilih = input_edit(brand,show_type(brand,name_brand))
-    brand[Pilih-1] = Edit
+def delete_handphone():
+    while True:
+        menu_read()
+        Brand = input("Pilih brand dari type handphone yang mau di hapus : ")
+        clear_screen()
+        if Brand == "1":
+            delete_type(Samsung,"Samsung")
+        elif Brand =="2":
+            delete_type(Infinix,"Infinix")
+        elif Brand == "3":
+            show_menu_admin()
+        else:
+            print("Noted : Pilih angka yang terdapat pada menu !")
+        
+def delete_type(brand,name_brand):
+    while True:
+        try:
+            print(show_type(brand,name_brand))
+            pilih = int(input("Pilih ID yang mau di hapus : "))
+            clear_screen()
+            if pilih in [i+1 for i in range(len(brand))]:
+                del brand[pilih-1]
+                print("Noted : data berhasil di hapus")
+                return
+            else:
+                print("Noted : ID yang anda inputkan tidak ada\n")
+        except ValueError:
+            clear_screen()
+            print("Noted : ID yang anda inputkan tidak ada\n")
 
 
 if __name__ == "__main__":
