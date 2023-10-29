@@ -1,5 +1,6 @@
+#Variable Login user
 Login = {
-    "user"  : "user",
+    "user"  : ["user",0,[]] #Index 0 sebagai pass , index 1 sebagai saldo , dan 2 sebagai keranjang
 }
 
 
