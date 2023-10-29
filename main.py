@@ -1,5 +1,5 @@
 import os
-from data import Login,Database,header
+from data import Login,Database,header,Samsung,Infinix
 from tabulate import tabulate
 
 #Fungsi untuk membersihkan terminal
@@ -129,11 +129,11 @@ def read_handphone():
         pilih = input("Pilih no brand : ")
         clear_screen()
         if pilih == "1":
-            show_type_samsung()
+            print(show_type(Samsung,"Samsung"))
             back_to_menu()
             clear_screen()
         elif pilih == "2":
-            show_type_infinix()
+            print(show_type(Infinix,"Infinix"))
             back_to_menu()
             clear_screen()
         elif pilih == "3":
@@ -153,19 +153,12 @@ ______________
 Back    >> 3
 """)
 
-def show_type_samsung():
-    Samsung = Database["Samsung"]
-    print("Brand Samsung")
-    for i in range(len(Samsung)):Samsung[i].insert(0,i+1)
-    print(tabulate(Samsung,headers=header,tablefmt="simple_grid"))
-    for i in range(len(Samsung)):del Samsung[i][0]
-
-def show_type_infinix():
-    Infinix = Database["Infinix"]
-    print("Brand Infinix")
-    for i in range(len(Infinix)):Infinix[i].insert(0,i+1)
-    print(tabulate(Infinix,headers=header,tablefmt="simple_grid"))
-    for i in range(len(Infinix)):del Infinix[i][0]
+def show_type(brand,name_brand):
+    print(f"Brand {name_brand}")
+    for i in range(len(brand)):brand[i].insert(0,i+1)
+    table = tabulate(brand,headers=header,tablefmt="simple_grid")
+    for i in range(len(brand)):del brand[i][0]
+    return table
 
 
 def update_handphone():
@@ -174,9 +167,9 @@ def update_handphone():
         Brand = input("Pilih brand yang mau di tambah : ")
         clear_screen()
         if Brand == "1":
-            update_samsung()
+            update_type(Samsung,"Samsung")
         elif Brand =="2":
-            update_infinix()
+            update_type(Infinix,"Infinix")
         elif Brand == "3":
             show_menu_admin()
         else:
@@ -190,23 +183,19 @@ def input_update():
             Storage        = int(input("Storage / Penyimpanan (Gb): "))
             Processor      = input("Processor : ")
             Harga          = int(input("Harga : Rp"))
-            print("Noted : Data berhasil di tambahkan :) ")
+            clear_screen()
             return [Type_handphone,Ram,Storage,Processor,Harga]
         except ValueError:
             clear_screen()
             print("Noted : Inputan tidak valid silahkan mengulang \n")
 
 
-def update_samsung():
-    Samsung        = Database["Samsung"]
+def update_type(brand,name_brand):
+    print(f"Masukan data baru tentang brand {name_brand}\n")
+    print("===============================================")
     Update         = input_update()
-    Samsung.append(Update)
-    update_handphone()
-
-def update_infinix():
-    Infinix        = Database["Infinix"]
-    Update         = input_update()
-    Infinix.append(Update)
+    print("Noted : Data berhasil di tambahkan :) ")
+    brand.append(Update)
     update_handphone()
     
 def edit_handphone():
@@ -215,61 +204,36 @@ def edit_handphone():
         Brand = input("Pilih brand yang mau diedit : ")
         clear_screen()
         if Brand == "1":
-            edit_samsung()
+            edit_type(Samsung,"Samsung")
         elif Brand =="2":
-            edit_infinix()
+            edit_type(Infinix,"Infinix")
         elif Brand == "3":
             show_menu_admin()
         else:
             print("Noted : Pilih angka yang terdapat pada menu !")
 
-def edit_samsung():
+def input_edit(brand,type_brand):
     while True:
         try:
-            Samsung = Database["Samsung"]
-            show_type_samsung()
+            print(type_brand)
             pilih = int(input("Pilih ID yang mau di edit : "))
             clear_screen()
-            if pilih in [i+1 for i in range(len(Samsung))]:
-                clear_screen()
+            if pilih in [i+1 for i in range(len(brand))]:
                 print("Masukan data baru \n ")
                 print("=====================")
-                Edit    = input_update()
+                edit = input_update()
                 clear_screen()
                 print("Noted : data berhasil di edit")
-                Samsung[pilih - 1] = Edit
-                return
+                return edit , pilih
             else:
                 print("Noted : ID yang anda inputkan tidak ada\n")
-        except ValueError: 
+        except ValueError:
             clear_screen()
             print("Noted : ID yang anda inputkan tidak ada\n")
 
-def edit_infinix():
-    while True:
-        try:
-            Infinix = Database["Infinix"]
-            show_type_infinix()
-            pilih = int(input("Pilih ID yang mau di edit : "))
-            clear_screen()
-            if pilih in [i+1 for i in range(len(Infinix))]:
-                clear_screen()
-                print("Masukan data baru \n ")
-                print("=====================")
-                Edit    = input_update()
-                clear_screen()
-                print("Noted : data berhasil di edit")
-                Infinix[pilih - 1] = Edit
-                return
-            else:
-                print("Noted : ID yang anda inputkan tidak ada\n")
-        except ValueError: 
-            clear_screen()
-            print("Noted : ID yang anda inputkan tidak ada\n")
-
-
-
-
+def edit_type(brand,name_brand):
+    Edit , Pilih = input_edit(brand,show_type(brand,name_brand))
+    brand[Pilih-1] = Edit
 
 
 if __name__ == "__main__":
