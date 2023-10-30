@@ -280,6 +280,7 @@ Log Out          >> 4
 _____________________
 Exit             >> 5
 _____________________
+
 Saldo anda saat ini >> Rp.{Login[nama_akun][1]}
 """)
         pilihan_user = input("Pilih menu: ")
