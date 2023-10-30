@@ -218,7 +218,7 @@ def edit_type(brand,name_brand):
             print(show_type(brand,name_brand,header))
             pilih = int(input("Pilih ID yang mau di edit : "))
             clear_screen()
-            if pilih-1 < len(brand):
+            if pilih in [i+1 for i in range(len(brand))]:
                 print("Masukan data baru \n ")
                 print("=====================")
                 edit = input_update()
@@ -252,7 +252,7 @@ def delete_type(brand,name_brand):
             print(show_type(brand,name_brand,header))
             pilih = int(input("Pilih ID yang mau di hapus : "))
             clear_screen()
-            if pilih-1 < len(brand):
+            if pilih in [i+1 for i in range(len(brand))]:
                 del brand[pilih-1]
                 print("Noted : data berhasil di hapus")
                 return
@@ -344,7 +344,7 @@ def masuk_keranjang(brand,name_brand,nama_akun):
             print(show_type(brand,name_brand,header))
             pilih = int(input("Masukan ID handphone yang mau di masukan ke keranjang : "))
             clear_screen()
-            if pilih -1 < len(brand):
+            if pilih in [i+1 for i in range(len(brand))]:
                 produk = brand[pilih - 1][0]
                 harga = brand[pilih -1 ][4]
                 keranjang = [produk,harga]
@@ -375,7 +375,7 @@ def Check_out(nama_akun, keranjang_akun):
         print(show_type(keranjang_akun,"Keranjang",header_keranjang))
         ID_checkout = int(input("Masukkan ID hanphone yang mau di check out: "))
         clear_screen()
-        if ID_checkout-1 < len(Login[nama_akun][2]):        
+        if ID_checkout in [i+1 for i in range(len(Login[nama_akun][2]))]:        
             barang_checkout= Login[nama_akun][2][ID_checkout-1]
             print(f"Saldo anda saat ini adalah Rp. {Login[nama_akun][1]}\n")
             Transaksi = input("Apakah anda ingin melanjutkan transaksi(y/n): ")
