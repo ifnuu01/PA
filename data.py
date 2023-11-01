@@ -14,8 +14,16 @@ Database = {"Samsung"    : [["Samsung J2 Prime",2,16,"Snapdragon 888",200000],
                              ["Infinix Hot 30 Play",4,64,"Helio G37 (12 nm)",1250000],
                              ["Infinix Hot 30",8,128,"Helio G88(12nm)",1540000],
                              ["Infinix Hot 30i",8,128,"Helio G37",1199000]],
-            "Xiomi"       : [[]],
-            "Oppo"        : [[]]
+            "Xiomi"       : [["Redmi Note 11", 4, 64, "MediaTek Dimensity 810 5G (6 nm)", 2500000],
+                             ["Redmi Note 11 Pro", 4, 128, "Snapdragon 695 5G (6 nm)", 3500000], 
+                             ["Redmi 9A", 2, 32, "Mediatek Helio G25 (12 nm)", 1200000], 
+                             ["Poco M4 Pro", 6, 128, "MediaTek Helio G96", 3000000], 
+                             ["Redmi 9C", 4, 64, "Mediatek Helio G35 (12 nm)" ,1650000]],
+            "Oppo"        : [["OPPO A98 5G", 8, 128, "Qualcomm® Snapdragon™ 695", 5000000], 
+                             ["OPPO Reno10 Pro+ 5G", 12, 256, "Snapdragon® 8+ Gen 1", 11000000],
+                             ["OPPO Reno6 5G",8,128,"MediaTek Dimensity 900",5700000], 
+                             ["OPPO A18",4,128,"MediaTek Helio G85",1800000],
+                             ["OPPO Find N3 Flip",12,256,"Mediatek Dimensity 9200",16000000]]
 }
 
 header = ["ID","Type HandPhone","Ram (Gb)","Storage (Gb)","Processor","Harga (Rp)"]
@@ -23,3 +31,5 @@ header = ["ID","Type HandPhone","Ram (Gb)","Storage (Gb)","Processor","Harga (Rp
 header_keranjang = ["ID", "Tipe HP", "Harga"]
 Samsung = Database["Samsung"]
 Infinix = Database["Infinix"]
+Xiomi   = Database["Xiomi"]
+Oppo    = Database["Oppo"]
