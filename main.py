@@ -7,12 +7,16 @@ def clear_screen():
     #Untuk os windows cls , dan linux clear
     os.system('cls' if os.name == 'nt' else 'clear')
 
+#Fungsi back to menu atau pembatas
+def back_to_menu():
+    input("\nTekan enter untuk kembali...")
+
 #Fungsi login
 def auth_role():
     gagal = 0
     #Jika gagal login 3x maka while akan berhenti
     while gagal < 3:
-        print("Menu Login \n")
+        print(tabulate([["Menu Login \n"]],tablefmt="double_grid"))
         #variable username dan password untuk menampung inputan
         username = input("Username : ")
         password = input("password : ")
@@ -26,17 +30,19 @@ def auth_role():
         else:
             #Jika username dan password tidak ada di dalam role user / admin maka variable gagal akan di tambah 1 sebagai pembatas perulangan
             gagal += 1
-            print(f"noted :  Login gagal ke {gagal} , jika gagal login 3x maka akan di keluarkan ke menu awal\n")
+            print(tabulate([[f"noted :  Login gagal ke {gagal} , jika gagal login 3x maka akan di keluarkan ke menu awal"]],tablefmt="double_grid"))
+            print()
 
 #Fungsi registrasi user
 def registrasi_user():
     while True:
-        print("Silahkan buat akun baru anda \n")
+        print(tabulate([["Silahkan buat akun"]],tablefmt="double_grid"))
         #variable username dan password untuk menampung inputan
-        username = input("Username baru : ")
+        username = input("\nUsername baru : ")
         if username in Login.keys():
             clear_screen()
-            print("Noted : Username telah di pakai , coba yang lain\n")
+            print(tabulate([["Noted : Username telah di pakai , coba yang lain"]],tablefmt="double_grid"))
+            print()
         else:
             password = input("password baru : ")
             clear_screen()
@@ -49,17 +55,8 @@ def show_menu_awal():
     #Perulangan yang di mana menu akan terus di ulang jika tidak sesuai dengan inputan
     while True:
         #Menampilkan menu-menu yang terdapat pada menu awal
-        print("""
-================
- Toko Handphone
-      Menu 
-================
-Login       >> 1
-________________
-Registrasi  >> 2
-________________
-Exit        >> 3
-""")
+        tampilan = [["Login"],["Registrasi"],["Exit"]]
+        print(tabulate(tampilan,headers=["No","Selamat Datang di Toko Handphone"],tablefmt="mixed_grid",showindex=range(1,len(tampilan)+1)))
         #Varible pilih sebagai penampung inputan
         pilih = input("Pilih Menu : ")
         clear_screen()
@@ -71,33 +68,20 @@ Exit        >> 3
             registrasi_user()
         #Jika inputan pilih bernilai str 3 maka memberhentikan program
         elif pilih == "3":
-            print("Terima kasih telah berkunjung")
+            print(tabulate([["Terima kasih telah berkunjung"]],tablefmt="double_grid"))
             exit()
         #Jika akan inputan pilih tidak terdapat pada menu maka akan di berikan peringatan seperti di bawah
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([[]],tablefmt="double_grid"))
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
 #Fungsi show menu admin
 def show_menu_admin():
     #Perulangan yang di mana menu akan terus di ulang jika tidak sesuai dengan inputan
     while True:
         #Menampilkan menu-menu yang terdapat pada menu admin
-        print("""
-=====================
-              
-    Dashboard Admin
-              
-=====================
-Read Handphone   >> 1
-_____________________
-Update Handphone >> 2
-_____________________
-Edit Handphone   >> 3
-_____________________
-Delete Handphone >> 4
-_____________________
-Logout           >> 5         
-""")
+        tampilan = [["Read Handphone"],["Update Handphone"],["Edit Handphone"],["Delete Handphone "],["Logout"]]
+        print(tabulate(tampilan,headers=["No","Dashboard Admin"],tablefmt="mixed_grid",showindex=range(1,len(tampilan)+1)))
         #Varible pilih sebagai penampung inputan
         pilih = input("Pilih menu : ")
         clear_screen()
@@ -118,10 +102,11 @@ Logout           >> 5
             show_menu_awal()
         #Jika akan inputan pilih tidak terdapat pada menu maka akan di berikan peringatan seperti di bawah
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
-def back_to_menu():
-    input("\nTekan enter untuk kembali...")
+def menu_read():
+    tampilan = [["Samsung"],["Infinix"],["Back"]]
+    print(tabulate(tampilan,headers=["No","Daftar Brand"],tablefmt="mixed_grid",showindex=range(1,len(tampilan)+1)))
 
 def read_handphone():
     while True:
@@ -139,25 +124,12 @@ def read_handphone():
         elif pilih == "3":
             show_menu_admin()
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
-def menu_read():
-    print("""
-==============
- Daftar Brand 
-==============
-Samsung >> 1
-______________
-Infinix >> 2
-______________
-Back    >> 3
-""")
 
 def show_type(brand,name_brand,header):
     print(f"Daftar {name_brand}")
-    for i in range(len(brand)):brand[i].insert(0,i+1)
-    table = tabulate(brand,headers=header,tablefmt="simple_grid")
-    for i in range(len(brand)):del brand[i][0]
+    table = tabulate(brand,headers=header,tablefmt="simple_grid",showindex=range(1,len(brand)+1))
     return table
 
 
@@ -173,7 +145,17 @@ def update_handphone():
         elif Brand == "3":
             show_menu_admin()
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([[]],tablefmt="double_grid"))
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+
+
+def update_type(brand,name_brand):
+    print(tabulate([[f"Masukan data baru tentang brand {name_brand}\n"]],tablefmt="double_grid"))
+    Update         = input_update()
+    print(tabulate([["Noted : Data berhasil di tambahkan :) "]],tablefmt="double_grid"))
+    brand.append(Update)
+    update_handphone()
+
 
 def input_update():
     while True:
@@ -187,16 +169,8 @@ def input_update():
             return [Type_handphone,Ram,Storage,Processor,Harga]
         except ValueError:
             clear_screen()
-            print("Noted : Inputan tidak valid silahkan mengulang \n")
+            print(tabulate([["Noted : Inputan tidak valid silahkan mengulang \n"]],tablefmt="double_grid"))
 
-
-def update_type(brand,name_brand):
-    print(f"Masukan data baru tentang brand {name_brand}\n")
-    print("===============================================")
-    Update         = input_update()
-    print("Noted : Data berhasil di tambahkan :) ")
-    brand.append(Update)
-    update_handphone()
     
 def edit_handphone():
     while True:
@@ -210,7 +184,7 @@ def edit_handphone():
         elif Brand == "3":
             show_menu_admin()
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
 def edit_type(brand,name_brand):
     while True:
@@ -218,19 +192,25 @@ def edit_type(brand,name_brand):
             print(show_type(brand,name_brand,header))
             pilih = int(input("Pilih ID yang mau di edit : "))
             clear_screen()
-            if pilih in [i+1 for i in range(len(brand))]:
-                print("Masukan data baru \n ")
-                print("=====================")
-                edit = input_update()
+            if len(brand) <= 0 :
+                print(tabulate([["Tidak ada handphone yang tersedia"]],tablefmt="double_grid"))
+                back_to_menu()
                 clear_screen()
-                print("Noted : data berhasil di edit")
-                brand[pilih-1] = edit
-                return
+                show_menu_admin()
             else:
-                print("Noted : ID yang anda inputkan tidak ada\n")
+                if pilih in [i+1 for i in range(len(brand))]:
+                    print("Masukan data baru \n ")
+                    print("=====================")
+                    edit = input_update()
+                    clear_screen()
+                    print(tabulate([["Noted : data berhasil di edit"]],tablefmt="double_grid"))
+                    brand[pilih-1] = edit
+                    return
+                else:
+                    print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
         except ValueError:
             clear_screen()
-            print("Noted : ID yang anda inputkan tidak ada\n")
+            print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
 
 def delete_handphone():
     while True:
@@ -244,7 +224,7 @@ def delete_handphone():
         elif Brand == "3":
             show_menu_admin()
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
         
 def delete_type(brand,name_brand):
     while True:
@@ -252,37 +232,28 @@ def delete_type(brand,name_brand):
             print(show_type(brand,name_brand,header))
             pilih = int(input("Pilih ID yang mau di hapus : "))
             clear_screen()
-            if pilih in [i+1 for i in range(len(brand))]:
-                del brand[pilih-1]
-                print("Noted : data berhasil di hapus")
-                return
+            if len(brand) <= 0 :
+                print(tabulate([["Tidak ada handphone yang tersedia"]],tablefmt="double_grid"))
+                back_to_menu()
+                clear_screen()
+                show_menu_admin()
             else:
-                print("Noted : ID yang anda inputkan tidak ada\n")
+                if pilih in [i+1 for i in range(len(brand))]:
+                    del brand[pilih-1]
+                    print(tabulate([["Noted : data berhasil di hapus"]],tablefmt="double_grid"))
+                    return
+                else:   
+                    print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
         except ValueError:
             clear_screen()
-            print("Noted : ID yang anda inputkan tidak ada\n")
+            print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
 
 def show_menu_user(nama_akun):
     while True:
-        print(f"""
-=====================
-              
-    Dashboard User
-      
-=====================
-Isi saldo        >> 1
-_____________________
-list Produk      >> 2
-_____________________
-Keranjang        >> 3
-_____________________
-Log Out          >> 4
-_____________________
-Exit             >> 5
-_____________________
-
-Saldo anda saat ini >> Rp.{Login[nama_akun][1]}
-""")
+        table = [["Isi saldo"],["list Produk"],["Keranjang"],["Log Out"],["Exit"]]
+        header_table = ["No","Selamat Datang di TokoHanphone"]
+        print(tabulate(table,headers=header_table,showindex=range(1,6),tablefmt="double_grid"))
+        print(tabulate([[f"Saldo anda saat ini >> Rp.{Login[nama_akun][1]}"]],tablefmt="double_grid"))
         pilihan_user = input("Pilih menu: ")
         clear_screen()
         if pilihan_user == "1":
@@ -294,23 +265,23 @@ Saldo anda saat ini >> Rp.{Login[nama_akun][1]}
         elif pilihan_user == "4":
             show_menu_awal()
         elif pilihan_user == "5":
-            print("Terima kasih telah berkunjung")
+            print(tabulate([["Terima kasih telah berkunjung"]],tablefmt="double_grid"))
             exit()
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
 def top_up(nama_akun):
     while True:
         try:
-            print(f"Saldo anda saat ini berjumlah {Login[nama_akun][1]}\n")
+            print(tabulate([[f"Saldo anda saat ini berjumlah {Login[nama_akun][1]}\n"]],tablefmt="double_grid"))
             top_up = int(input("Masukan nominal top up : Rp")) 
             clear_screen()
             Login[nama_akun][1] += top_up
-            print("Noted : Anda berhasil top up")
+            print(tabulate([["Noted : Anda berhasil top up"]],tablefmt="double_grid"))
             back_to_menu()
             clear_screen()
             show_menu_user(nama_akun)
-        except ValueError:clear_screen();print("Inputan anda tikak valid")
+        except ValueError:clear_screen();print(tabulate([["Inputan anda tikak valid"]],tablefmt="double_grid"))
 
 def read_handphone_user(nama_akun):
     while True:
@@ -324,7 +295,7 @@ def read_handphone_user(nama_akun):
         elif pilih == "3":
             show_menu_user(nama_akun)
         else:
-            print("Noted : Pilih angka yang terdapat pada menu !")
+            print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
 def show_type_user(brand,name_brand,nama_akun):
     while True:
@@ -332,12 +303,18 @@ def show_type_user(brand,name_brand,nama_akun):
         pilihan = input("ingin memasukan produk ke keranjang [y/n] :")
         clear_screen()
         if pilihan == "y":
-            masuk_keranjang(brand,name_brand,nama_akun)
+            if len(brand) <= 0 :
+                print(tabulate([["Tidak ada handphone yang tersedia"]],tablefmt="double_grid"))
+                back_to_menu()
+                clear_screen()
+                show_menu_user(nama_akun)
+            else:
+                masuk_keranjang(brand,name_brand,nama_akun)
              #menambahkan ke keranjang
         elif pilihan =="n":
             read_handphone_user(nama_akun)
         else:
-            print("Noted : Pilih y / n !! , Silahkan ulangi\n")
+            print(tabulate([["Noted : Pilih y / n !! , Silahkan ulangi\n"]],tablefmt="double_grid"))
 
 def masuk_keranjang(brand,name_brand,nama_akun):
     while True:
@@ -350,12 +327,13 @@ def masuk_keranjang(brand,name_brand,nama_akun):
                 harga = brand[pilih -1 ][4]
                 keranjang = [produk,harga]
                 Login[nama_akun][2].append(keranjang)
-                print("Data berhasil di masukan ke keranjang\n")
+                print(tabulate([["Data berhasil di masukan ke keranjang\n"]],tablefmt="double_grid"))
                 back_to_menu()
+                clear_screen()
                 show_menu_user(nama_akun)
             else:
-                print("Noted : ID yang anda inputkan tidak ada\n")
-        except ValueError:clear_screen();print("Noted : ID yang anda inputkan tidak ada\n")
+                print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
+        except ValueError:clear_screen();print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
 
 def keranjang(nama_akun):
     while True:
@@ -364,53 +342,57 @@ def keranjang(nama_akun):
         Pilihan_checkout= input("Apakah ada barang yang ingin di check out[y/n]: ")
         clear_screen()
         if  Pilihan_checkout == "y":
-            Check_out(nama_akun, keranjang_akun)
+            if len(Login[nama_akun][2]) <= 0 :
+                print(tabulate([["Keranjang Anda Kosong"]],tablefmt="double_grid"))
+                back_to_menu()
+                clear_screen()
+                show_menu_user(nama_akun)
+            else:
+                check_out(nama_akun, keranjang_akun)
         elif Pilihan_checkout == "n":
             show_menu_user(nama_akun)
         else:
-            print("Noted : Pilih y / n !!, Silahkan ulangi lagi\n")
+            print(tabulate([["Noted : Pilih y / n !!, Silahkan ulangi lagi\n"]],tablefmt="double_grid"))
 
 #Fungsi Checkout
-def Check_out(nama_akun, keranjang_akun):
+def check_out(nama_akun, keranjang_akun):
     while True: 
         print(show_type(keranjang_akun,"Keranjang",header_keranjang))
         ID_checkout = int(input("Masukkan ID hanphone yang mau di check out: "))
         clear_screen()
         if ID_checkout in [i+1 for i in range(len(Login[nama_akun][2]))]:        
             barang_checkout= Login[nama_akun][2][ID_checkout-1]
-            print(f"Saldo anda saat ini adalah Rp. {Login[nama_akun][1]}\n")
+            print(tabulate([[f"Saldo anda saat ini adalah Rp. {Login[nama_akun][1]}\n"]],tablefmt="double_grid"))
             Transaksi = input("Apakah anda ingin melanjutkan transaksi(y/n): ")
             clear_screen()
             if Transaksi == "y":
                 if Login[nama_akun][1] < barang_checkout[1]:
-                    print("Noted : Saldo Tidak Cukup\n")
+                    print(tabulate([["Noted : Saldo Tidak Cukup\n"]],tablefmt="double_grid"))
                     back_to_menu()
+                    clear_screen()
                     show_menu_user(nama_akun)
                 else:
                     sisa_saldo = Login[nama_akun][1]-barang_checkout[1]
                     Login[nama_akun][1] = sisa_saldo
-                    print (f"""
-Selamat Pembayaran Anda Berhasil
-================================
-Nama Produk   : 
-{Login[nama_akun][2][ID_checkout-1][0]}
-________________________________
-Total Harga   :
-Rp {Login[nama_akun][2][ID_checkout-1][1]}
-________________________________
-""")
+                    display_struk(nama_akun,ID_checkout)
                     del Login[nama_akun][2][ID_checkout-1]
                     back_to_menu()
+                    clear_screen()
                     show_menu_user(nama_akun)
             elif Transaksi =="n":
-                print("Transaksi gagal")
+                print(tabulate([["Transaksi gagal"]],tablefmt="double_grid"))
                 back_to_menu()
                 show_menu_user(nama_akun)
             else:
-                print("Noted : Pilih y / n !! Silahkan ulangi \n")
+                print(tabulate([["Noted : Pilih y / n !! Silahkan ulangi \n"]],tablefmt="double_grid"))
         else:
-            print("Noted : Masukan ID yang tertera pada keranjang , Silahkan ulangi dari awal\n")
+            print(tabulate([["Noted : Masukan ID yang tertera pada keranjang , Silahkan ulangi dari awal\n"]],tablefmt="double_grid"))
 
+
+def display_struk(nama_akun,ID_checkout):
+    header_table = ["Selamat Pembayaran Anda Berhasil"]
+    table = [[f"Nama Produk   : {Login[nama_akun][2][ID_checkout-1][0]}"],[f"Total Harga   : Rp {Login[nama_akun][2][ID_checkout-1][1]}"]]
+    print(tabulate(table,headers=header_table,tablefmt="double_grid"))
 
 if __name__ == "__main__":
     os.system('pip install tabulate')
