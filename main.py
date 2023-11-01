@@ -1,5 +1,5 @@
 import os
-from data import Login,header,Samsung,Infinix,header_keranjang
+from data import Login,header,Samsung,Infinix,header_keranjang,Xiomi,Oppo
 from tabulate import tabulate
 
 #Fungsi untuk membersihkan terminal
@@ -105,8 +105,9 @@ def show_menu_admin():
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
 def menu_read():
-    tampilan = [["Samsung"],["Infinix"],["Back"]]
+    tampilan = [["Samsung"],["Infinix"],["Xiomi"],["Oppo"]]
     print(tabulate(tampilan,headers=["No","Daftar Brand"],tablefmt="mixed_grid",showindex=range(1,len(tampilan)+1)))
+    print(tabulate([["Back >> 5"]],tablefmt="double_grid"))
 
 def read_handphone():
     while True:
@@ -122,13 +123,21 @@ def read_handphone():
             back_to_menu()
             clear_screen()
         elif pilih == "3":
+            print(show_type(Xiomi,"Xiomi",header))
+            back_to_menu()
+            clear_screen()
+        elif pilih == "4":
+            print(show_type(Oppo,"Oppo",header))
+            back_to_menu()
+            clear_screen()
+        elif pilih == "5":
             show_menu_admin()
         else:
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
 
 
 def show_type(brand,name_brand,header):
-    print(f"Daftar {name_brand}")
+    print(tabulate([[f"Daftar {name_brand}"]],tablefmt="double_grid"))
     table = tabulate(brand,headers=header,tablefmt="simple_grid",showindex=range(1,len(brand)+1))
     return table
 
@@ -142,7 +151,11 @@ def update_handphone():
             update_type(Samsung,"Samsung")
         elif Brand =="2":
             update_type(Infinix,"Infinix")
-        elif Brand == "3":
+        elif Brand =="3":
+            update_type(Xiomi,"Xiomi")
+        elif Brand =="4":
+            update_type(Oppo,"Oppo")
+        elif Brand == "5":
             show_menu_admin()
         else:
             print(tabulate([[]],tablefmt="double_grid"))
@@ -181,7 +194,11 @@ def edit_handphone():
             edit_type(Samsung,"Samsung")
         elif Brand =="2":
             edit_type(Infinix,"Infinix")
-        elif Brand == "3":
+        elif Brand =="3":
+            edit_type(Xiomi,"Xiomi")
+        elif Brand =="4":
+            edit_type(Oppo,"Oppo")
+        elif Brand == "5":
             show_menu_admin()
         else:
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
@@ -199,8 +216,7 @@ def edit_type(brand,name_brand):
                 show_menu_admin()
             else:
                 if pilih in [i+1 for i in range(len(brand))]:
-                    print("Masukan data baru \n ")
-                    print("=====================")
+                    print(tabulate([["Masukan data baru \n "]],tablefmt="double_grid"))
                     edit = input_update()
                     clear_screen()
                     print(tabulate([["Noted : data berhasil di edit"]],tablefmt="double_grid"))
@@ -221,7 +237,11 @@ def delete_handphone():
             delete_type(Samsung,"Samsung")
         elif Brand =="2":
             delete_type(Infinix,"Infinix")
-        elif Brand == "3":
+        elif Brand =="3":
+            delete_type(Xiomi,"Xiomi")
+        elif Brand =="4":
+            delete_type(Oppo,"Oppo")
+        elif Brand == "5":
             show_menu_admin()
         else:
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
@@ -293,6 +313,10 @@ def read_handphone_user(nama_akun):
         elif pilih == "2":
             show_type_user(Infinix,"Infinix",nama_akun)
         elif pilih == "3":
+            show_type_user(Xiomi,"Xiomi",nama_akun)
+        elif pilih == "4":
+            show_type_user(Oppo,"Oppo",nama_akun)
+        elif pilih == "5":
             show_menu_user(nama_akun)
         else:
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
