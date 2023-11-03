@@ -721,64 +721,76 @@ def keranjang(nama_akun):
 def check_out(nama_akun, keranjang_akun):
     #Melakukan perulangan
     while True: 
-        #Menampilkan keranjang dari user
-        print(show_type(keranjang_akun,"Keranjang",header_keranjang))
-        #Memasukkan pilihan barang yang ingin di checkout
-        ID_checkout = int(input("Masukkan ID hanphone yang mau di check out: "))
-        #Fungsi pembersih terminal 
-        clear_screen()
-        #Percabangan ketika barang yang ingin di checkout terdapat pada keranjang
-        if ID_checkout in [i+1 for i in range(len(Login[nama_akun][2]))]:        
-            barang_checkout= Login[nama_akun][2][ID_checkout-1]
-            #Menampilkan saldo user
-            print(tabulate([[f"Saldo anda saat ini adalah Rp. {Login[nama_akun][1]}\n"]],tablefmt="double_grid"))
-            #Mengkonfirmasi transaksi user
-            Transaksi = input("Apakah anda ingin melanjutkan transaksi(y/n): ")
+        try:
+            #Menampilkan keranjang dari user
+            print(show_type(keranjang_akun,"Keranjang",header_keranjang))
+            #Memasukkan pilihan barang yang ingin di checkout
+            ID_checkout = int(input("Masukkan ID hanphone yang mau di check out: "))
             #Fungsi pembersih terminal 
             clear_screen()
-            #Percabangan ketika user ingin melanjutkan transaksi
-            if Transaksi == "y":
-                #Percabangan jika saldo user tidak cukup
-                if Login[nama_akun][1] < barang_checkout[1]:
+            #Percabangan ketika barang yang ingin di checkout terdapat pada keranjang
+            if ID_checkout in [i+1 for i in range(len(Login[nama_akun][2]))]:        
+                barang_checkout= Login[nama_akun][2][ID_checkout-1]
+                #Menampilkan saldo user
+                print(tabulate([[f"Saldo anda saat ini adalah Rp. {Login[nama_akun][1]}\n"]],tablefmt="double_grid"))
+                #Mengkonfirmasi transaksi user
+                Transaksi = input("Apakah anda ingin melanjutkan transaksi(y/n): ")
+                #Fungsi pembersih terminal 
+                clear_screen()
+                #Percabangan ketika user ingin melanjutkan transaksi
+                if Transaksi == "y":
+                    #Percabangan jika saldo user tidak cukup
+                    if Login[nama_akun][1] < barang_checkout[1]:
+                        #Menampilkan Noted / peringatan dengan tabulate
+                        print(tabulate([["Noted : Saldo Tidak Cukup\n"]],tablefmt="double_grid"))
+                        back_to_menu()
+                        #Fungsi pembersih terminal 
+                        clear_screen()
+                        show_menu_user(nama_akun)
+                    #Percabangan ketika saldo user cukup 
+                    else:
+                        #Menghitung sisa saldo
+                        sisa_saldo = Login[nama_akun][1]-barang_checkout[1]
+                        #Menyimpan sisa saldo user ke database
+                        Login[nama_akun][1] = sisa_saldo
+                        #Memanggil fungsi display struk
+                        display_struk(nama_akun,ID_checkout)
+                        #Menghapus barang yang dibeli dari keranjang
+                        del Login[nama_akun][2][ID_checkout-1]
+                        back_to_menu()
+                        #Fungsi pembersih terminal 
+                        clear_screen()
+                        #Fungsi menampilkan menu user
+                        show_menu_user(nama_akun)
+                #Percabangan ketika user tidak ingin melanjutkan transaksi
+                elif Transaksi =="n":
                     #Menampilkan Noted / peringatan dengan tabulate
-                    print(tabulate([["Noted : Saldo Tidak Cukup\n"]],tablefmt="double_grid"))
-                    back_to_menu()
-                    #Fungsi pembersih terminal 
-                    clear_screen()
-                    show_menu_user(nama_akun)
-                #Percabangan ketika saldo user cukup 
-                else:
-                    #Menghitung sisa saldo
-                    sisa_saldo = Login[nama_akun][1]-barang_checkout[1]
-                    #Menyimpan sisa saldo user ke database
-                    Login[nama_akun][1] = sisa_saldo
-                    #Memanggil fungsi display struk
-                    display_struk(nama_akun,ID_checkout)
-                    #Menghapus barang yang dibeli dari keranjang
-                    del Login[nama_akun][2][ID_checkout-1]
+                    print(tabulate([["Transaksi gagal"]],tablefmt="double_grid"))
+                    #Fungsi back to menu / pembatas
                     back_to_menu()
                     #Fungsi pembersih terminal 
                     clear_screen()
                     #Fungsi menampilkan menu user
                     show_menu_user(nama_akun)
-            #Percabangan ketika user tidak ingin melanjutkan transaksi
-            elif Transaksi =="n":
-                #Menampilkan Noted / peringatan dengan tabulate
-                print(tabulate([["Transaksi gagal"]],tablefmt="double_grid"))
-                #Fungsi back to menu / pembatas
-                back_to_menu()
-                #Fungsi menampilkan menu user
-                show_menu_user(nama_akun)
+                #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
+                else:
+                    #Menampilkan Noted / peringatan dengan tabulate
+                    print(tabulate([["Noted : Pilih y / n !! Silahkan ulangi \n"]],tablefmt="double_grid"))
+                    #Fungsi back to menu atau sebagai pembatas
+                    back_to_menu()
+                    #Fungsi pembersih terminal
+                    clear_screen()
             #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
             else:
                 #Menampilkan Noted / peringatan dengan tabulate
-                print(tabulate([["Noted : Pilih y / n !! Silahkan ulangi \n"]],tablefmt="double_grid"))
+                print(tabulate([["Noted : Masukan ID yang tertera pada keranjang , Silahkan ulangi dari awal\n"]],tablefmt="double_grid"))
                 #Fungsi back to menu atau sebagai pembatas
                 back_to_menu()
                 #Fungsi pembersih terminal
                 clear_screen()
-        #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
-        else:
+        except ValueError:
+            #Fungsi pembersih terminal
+            clear_screen()
             #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Masukan ID yang tertera pada keranjang , Silahkan ulangi dari awal\n"]],tablefmt="double_grid"))
             #Fungsi back to menu atau sebagai pembatas
