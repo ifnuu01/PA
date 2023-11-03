@@ -31,6 +31,10 @@ def auth_role():
             #Jika username dan password tidak ada di dalam role user / admin maka variable gagal akan di tambah 1 sebagai pembatas perulangan
             gagal += 1
             print(tabulate([[f"Noted :  Login gagal ke {gagal} , jika gagal login 3x maka akan di keluarkan ke menu awal"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi registrasi user
 def registrasi_user():
