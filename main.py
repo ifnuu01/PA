@@ -30,8 +30,7 @@ def auth_role():
         else:
             #Jika username dan password tidak ada di dalam role user / admin maka variable gagal akan di tambah 1 sebagai pembatas perulangan
             gagal += 1
-            print(tabulate([[f"noted :  Login gagal ke {gagal} , jika gagal login 3x maka akan di keluarkan ke menu awal"]],tablefmt="double_grid"))
-            print()
+            print(tabulate([[f"Noted :  Login gagal ke {gagal} , jika gagal login 3x maka akan di keluarkan ke menu awal"]],tablefmt="double_grid"))
 
 #Fungsi registrasi user
 def registrasi_user():
@@ -42,7 +41,10 @@ def registrasi_user():
         if username in Login.keys():
             clear_screen()
             print(tabulate([["Noted : Username telah di pakai , coba yang lain"]],tablefmt="double_grid"))
-            print()
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
         else:
             password = input("password baru : ")
             clear_screen()
@@ -72,25 +74,28 @@ def show_menu_awal():
             exit()
         #Jika akan inputan pilih tidak terdapat pada menu maka akan di berikan peringatan seperti di bawah
         else:
-            print(tabulate([[]],tablefmt="double_grid"))
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi show menu admin
 def show_menu_admin():
     #Perulangan yang di mana menu akan terus di ulang jika tidak sesuai dengan inputan
     while True:
         #Menampilkan menu-menu yang terdapat pada menu admin
-        tampilan = [["Read Handphone"],["Update Handphone"],["Edit Handphone"],["Delete Handphone "],["Logout"]]
+        tampilan = [["List Handphone"],["Add Handphone"],["Edit Handphone"],["Delete Handphone "],["Logout"]]
         print(tabulate(tampilan,headers=["No","Dashboard Admin"],tablefmt="mixed_grid",showindex=range(1,len(tampilan)+1)))
         #Varible pilih sebagai penampung inputan
         pilih = input("Pilih menu : ")
         clear_screen()
-        #Percabangan yang dimana ketika inputan bernilai str 1 maka akan masuk ke Fungsi read_handphone
+        #Percabangan yang dimana ketika inputan bernilai str 1 maka akan masuk ke Fungsi list_handphone
         if  pilih == "1":
-            read_handphone()
-        #Jika inputan pilih bernilai str 2 maka akan masuk ke Fungsi update_handphone
+            list_handphone()
+        #Jika inputan pilih bernilai str 2 maka akan masuk ke Fungsi add_handphone
         elif pilih == "2":
-            update_handphone()
+            add_handphone()
         #Jika inputan pilih bernilai str 3 maka akan masuk ke Fungsi edit_handphone
         elif pilih == "3":
             edit_handphone()
@@ -103,6 +108,10 @@ def show_menu_admin():
         #Jika akan inputan pilih tidak terdapat pada menu maka akan di berikan peringatan seperti di bawah
         else:
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi menu read
 def menu_read():
@@ -114,7 +123,7 @@ def menu_read():
     print(tabulate([["Back >> 5"]],tablefmt="double_grid"))
 
 #Fungsi read handphone
-def read_handphone():
+def list_handphone():
     #Melakukan perulangan 
     while True:
         #Menampilkan fungsi yang ada pada menu read
@@ -161,8 +170,12 @@ def read_handphone():
             show_menu_admin()
         #Percabangan ketika kondisi di atas tidak terpenuhi maka program di bawah akan di jalankan 
         else:
-            #Ketika inputan tidak ada maka program di bawah akan di jalankan sebagai noted/ peringatan
+            #Ketika inputan tidak ada maka program di bawah akan di jalankan sebagai Noted/ peringatan
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 
 #Fungsi show type
@@ -174,7 +187,7 @@ def show_type(brand,name_brand,header):
     return table
 
 #FUngsi Update handphone
-def update_handphone():
+def add_handphone():
     #Melakukan perulangan tanpa batas
     while True:
         #Menampilkan fungsi dari menu read
@@ -186,19 +199,19 @@ def update_handphone():
         #Percabangan dimana ketika inputan bernilai str 1 maka akan menjalankan program di bawah
         if Brand == "1":
             #Menjalankan fungsi dari update type dengan parameter / argument Variable Samsung dan str Samsung
-            update_type(Samsung,"Samsung")
+            add_type(Samsung,"Samsung")
         #Percabangan dimana ketika inputan bernilai str 2 maka akan menjalankan program di bawah
         elif Brand =="2":
             #Menjalankan fungsi dari update type dengan parameter / argument Variable Infinix dan str Infinix
-            update_type(Infinix,"Infinix")
+            add_type(Infinix,"Infinix")
         #Percabangan dimana ketika inputan bernilai str 3 maka akan menjalankan program di bawah
         elif Brand =="3":
             #Menjalankan fungsi dari update type dengan parameter / argument Variable Xiaomi dan str Xiaomi
-            update_type(Xiaomi,"Xiaomi")
+            add_type(Xiaomi,"Xiaomi")
         #Percabangan dimana ketika inputan bernilai str 4 maka akan menjalankan program di bawah
         elif Brand =="4":
             #Menjalankan fungsi dari update type dengan parameter / argument Variable Oppo dan str Oppo
-            update_type(Oppo,"Oppo")
+            add_type(Oppo,"Oppo")
         #Percabangan dimana ketika inputan bernilai str 5 maka akan menjalankan program di bawah
         elif Brand == "5":
             #Menjalankan fungsi show menu admin
@@ -207,19 +220,27 @@ def update_handphone():
         else:
             #Menampilkan Noted / peringatan 
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi update type
-def update_type(brand,name_brand):
-    #Memberikan noted awal atau arahan dengan tabulate
+def add_type(brand,name_brand):
+    #Memberikan Noted awal atau arahan dengan tabulate
     print(tabulate([[f"Masukan data baru tentang brand {name_brand}\n"]],tablefmt="double_grid"))
     #Varibale update sebagai penampung dari nilai fungsi input update
     Update         = input_update()
     #Menambahkan data ke dalam database
     brand.append(Update)
-    #Menampilkan noted / peringatan dengan tabulate
+    #Menampilkan Noted / peringatan dengan tabulate
     print(tabulate([["Noted : Data berhasil di tambahkan :) "]],tablefmt="double_grid"))
+    #Fungsi back to menu atau sebagai pembatas
+    back_to_menu()
+    #Fungsi pembersih terminal
+    clear_screen()
     #Fungsi update handphone
-    update_handphone()
+    add_handphone()
 
 #Fungsi input update 
 def input_update():
@@ -227,6 +248,7 @@ def input_update():
     while True:
         #try yaitu seperti namanya mengulang ketika expect terpenuhi
         try:
+            print(tabulate([["Masukan Data : "]],tablefmt="double_grid"))
             #Varibale type handphone , ram , storage , processor , dan harga sebagai penampung dari inputan user
             Type_handphone = input("Masukan type handphone : ")
             Ram            = int(input("Ram (Gb): "))
@@ -235,14 +257,25 @@ def input_update():
             Harga          = int(input("Harga : Rp"))
             #Fungsi pembersi terminal
             clear_screen()
-            #Mengembalikan nilai inputan di atas ke dalam list
-            return [Type_handphone,Ram,Storage,Processor,Harga]
+            if Harga < 0:
+                print(tabulate([["Noted : Inputan tidak valid silahkan mengulang \n"]],tablefmt="double_grid"))
+                #Fungsi back to menu atau sebagai pembatas
+                back_to_menu()
+                #Fungsi pembersih terminal
+                clear_screen()
+            else:
+                #Mengembalikan nilai inputan di atas ke dalam list
+                return [Type_handphone,Ram,Storage,Processor,Harga]
         #Expect berjalan atau berfungsi sebagai penanda jika terjadi ValueError di dalam inputan maka program di bawah akan dijalankan
         except ValueError:
             #Fungsi pembersih terminal
             clear_screen()
             #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Inputan tidak valid silahkan mengulang \n"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi edit handphone 
 def edit_handphone():
@@ -276,8 +309,12 @@ def edit_handphone():
             show_menu_admin()
         #Percabangan ketika kondisi di atas tidak terpenuhi 
         else:
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi edit type
 def edit_type(brand,name_brand):
@@ -293,7 +330,7 @@ def edit_type(brand,name_brand):
             clear_screen()
             #Percabangan jika panjang dari brand atau list dari tipe handphone kurang atau sama dengan 0 maka blok kode di bawah akan di jalankan 
             if len(brand) <= 0 :
-                #Menampilkan noted / peringatan dengan tabulate 
+                #Menampilkan Noted / peringatan dengan tabulate 
                 print(tabulate([["Tidak ada handphone yang tersedia"]],tablefmt="double_grid"))
                 #Fungsi back to menu atau pembatas
                 back_to_menu()
@@ -305,7 +342,7 @@ def edit_type(brand,name_brand):
             else:
                 #Percabangan jika nilai dari variable pilih berada atau  ada di dalam list yang menampung ID dari tipe handphone 
                 if pilih in [i+1 for i in range(len(brand))]:
-                    #Menampilkan noted / peringatan dengan tabulate
+                    #Menampilkan Noted / peringatan dengan tabulate
                     print(tabulate([["Masukan data baru \n "]],tablefmt="double_grid"))
                     #Varibale edit sebagai penampung dari nilai fungsi input update
                     edit = input_update()
@@ -313,20 +350,28 @@ def edit_type(brand,name_brand):
                     clear_screen()
                     #Melukan changes nilai di dalam database yang di inginkan
                     brand[pilih-1] = edit
-                    #Menampilkan noted / peringatan dengan tabulate
+                    #Menampilkan Noted / peringatan dengan tabulate
                     print(tabulate([["Noted : data berhasil di edit"]],tablefmt="double_grid"))
+                    #Fungsi back to menu atau sebagai pembatas
+                    back_to_menu()
+                    #Fungsi pembersih terminal
+                    clear_screen()
                     #Mengembalikan nilai kosong atau return tanpa nilai untuk keluar dari fungsi dan mengembalikan kembali ke pemanggil fungsi 
                     return
                 #Percabangan ketika kondisi di atas tidak terpenuhi maka blok kode di bawah ini akan di jalankan 
                 else:
-                    #Menampilkan noted / peringatan
+                    #Menampilkan Noted / peringatan
                     print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
         #Excpect Sebagai menangani pengecualian agar tidak terjadi ValueError di dalam inputan 
         except ValueError:
             #Fungsi pembersih terminal
             clear_screen()
-            #Menampilkan noted / peringatan
+            #Menampilkan Noted / peringatan
             print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi delete handphone 
 def delete_handphone():
@@ -362,6 +407,10 @@ def delete_handphone():
         else:
             #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
         
 #Fungsi delete type dengan parameter / argument brand , name_akun
 def delete_type(brand,name_brand):
@@ -377,7 +426,7 @@ def delete_type(brand,name_brand):
             clear_screen()
             #Percabangan dimana ketika panjang dari brand / tipe handphone lebih kecil atua samadengan 0 maka blok kode di bawah akan di jalakan
             if len(brand) <= 0 :
-                #Menampilkan noted / peringatan dengan tabulate
+                #Menampilkan Noted / peringatan dengan tabulate
                 print(tabulate([["Tidak ada handphone yang tersedia"]],tablefmt="double_grid"))
                 #Fungsi back to menu / pembatas
                 back_to_menu()
@@ -393,18 +442,30 @@ def delete_type(brand,name_brand):
                     del brand[pilih-1]
                     #Menampilkan Noted / peringatan dengan tabulate 
                     print(tabulate([["Noted : data berhasil di hapus"]],tablefmt="double_grid"))
+                    #Fungsi back to menu atau sebagai pembatas
+                    back_to_menu()
+                    #Fungsi pembersih terminal
+                    clear_screen()
                     #Mengembalikan nilai kosong atau return tanpa nilai untuk keluar dari fungsi dan mengembalikan kembali ke pemanggil fungsi 
                     return
                 #Percabangan ketika kondisi di atas tidak terpenuhi
                 else:   
-                    #Menampikan noted / peringatan dengan tabulate 
+                    #Menampikan Noted / peringatan dengan tabulate 
                     print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
+                    #Fungsi back to menu atau sebagai pembatas
+                    back_to_menu()
+                    #Fungsi pembersih terminal
+                    clear_screen()
         #Excpect Sebagai menangani pengecualian agar tidak terjadi ValueError di dalam inputan 
         except ValueError:
             #Fungsi pembersih terminal
             clear_screen()
-            #Menampilkan noted / peringatan
+            #Menampilkan Noted / peringatan
             print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi show menu user dengan parameter atau argument nama_akun
 def show_menu_user(nama_akun):
@@ -429,7 +490,7 @@ def show_menu_user(nama_akun):
         #Percabangan ketika kondisi dari nilai variable pilihan_user bernilai str 2 makak blok kode di bawah di jalankan 
         elif pilihan_user == "2":
             #Memanggil fungsin read handphone user dengan parameter / argument nama_akun
-            read_handphone_user(nama_akun)
+            list_handphone_user(nama_akun)
         #Percabangan ketika kondisi dari nilai variable pilihan_user bernilai str 3 makak blok kode di bawah di jalankan 
         elif pilihan_user == "3":
             #Memanggil fungsi keranjang dengan parameter / argument nama_akun
@@ -440,14 +501,18 @@ def show_menu_user(nama_akun):
             show_menu_awal()
         #Percabangan ketika kondisi dari nilai variable pilihan_user bernilai str 5 makak blok kode di bawah di jalankan 
         elif pilihan_user == "5":
-            #Menampilkan noted 
+            #Menampilkan Noted 
             print(tabulate([["Terima kasih telah berkunjung"]],tablefmt="double_grid"))
             #Keluar dari program 
             exit()
         #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
         else:
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi top up dengan parameter nama_akun
 def top_up(nama_akun):
@@ -464,7 +529,7 @@ def top_up(nama_akun):
             if top_up > 0: 
                 #Menambahkan saldo 
                 Login[nama_akun][1] += top_up
-                #Menampilkan noted / peringatan dengan tabulate
+                #Menampilkan Noted / peringatan dengan tabulate
                 print(tabulate([["Noted : Anda berhasil top up"]],tablefmt="double_grid"))
                 back_to_menu()
                 #Fungsi pembersih terminal 
@@ -472,13 +537,21 @@ def top_up(nama_akun):
                 show_menu_user(nama_akun)
             else:
                 print(tabulate([["Noted : Nominal harus lebih besar dari nol (0) "]],tablefmt="double_grid"))
+                #Fungsi back to menu atau sebagai pembatas
+                back_to_menu()
+                #Fungsi pembersih terminal
+                clear_screen()
         #Excpect Sebagai menangani pengecualian agar tidak terjadi ValueError di dalam inputan 
         except ValueError:
             clear_screen()
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Inputan anda tikak valid"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
-def read_handphone_user(nama_akun):
+def list_handphone_user(nama_akun):
     #Melakukan perulangan 
     while True:
         #Menampilkan fungsi menu_read
@@ -509,8 +582,12 @@ def read_handphone_user(nama_akun):
             show_menu_user(nama_akun)
         #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
         else:
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Pilih angka yang terdapat pada menu !"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi show type user 
 def show_type_user(brand,name_brand,nama_akun):
@@ -526,7 +603,7 @@ def show_type_user(brand,name_brand,nama_akun):
         if pilihan == "y":
             #Percabangan jika panjang dari brand lebih kecil atau sama dengan 0 maka blok kode di bawah akan di jalankan
             if len(brand) <= 0 :
-                #Menampilakn noted / peringatan dengan tabulate 
+                #Menampilakn Noted / peringatan dengan tabulate 
                 print(tabulate([["Tidak ada handphone yang tersedia"]],tablefmt="double_grid"))
                 #Fungsi back to menu / pembatas
                 back_to_menu()
@@ -542,11 +619,15 @@ def show_type_user(brand,name_brand,nama_akun):
         #Percabangan jika nilai dari variable pilihan sama dengan str n maka blok kode di bawah akan di jalankan
         elif pilihan =="n":
             #Memanggil fungsi read handphone user dengan parameter nama_akun
-            read_handphone_user(nama_akun)
+            list_handphone_user(nama_akun)
         #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
         else:
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Pilih y / n !! , Silahkan ulangi\n"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi masuk keranjang 
 def masuk_keranjang(brand,name_brand,nama_akun):
@@ -568,7 +649,7 @@ def masuk_keranjang(brand,name_brand,nama_akun):
                 keranjang = [produk,harga]
                 #Menambahkan keranjang ke database
                 Login[nama_akun][2].append(keranjang)
-                #Menampilkan noted / peringatan dengan tabulate
+                #Menampilkan Noted / peringatan dengan tabulate
                 print(tabulate([["Data berhasil di masukan ke keranjang\n"]],tablefmt="double_grid"))
                 #Fungsi back to menu / pembatas
                 back_to_menu()
@@ -578,14 +659,22 @@ def masuk_keranjang(brand,name_brand,nama_akun):
                 show_menu_user(nama_akun)
             #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
             else:
-                #Menampilkan noted / peringatan dengan tabulate
+                #Menampilkan Noted / peringatan dengan tabulate
                 print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
+                #Fungsi back to menu atau sebagai pembatas
+                back_to_menu()
+                #Fungsi pembersih terminal
+                clear_screen()
         #Excpect Sebagai menangani pengecualian agar tidak terjadi ValueError di dalam inputan 
         except ValueError:
             #Fungsi pembersih terminal 
             clear_screen()
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : ID yang anda inputkan tidak ada\n"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi keranjang dengan parameter atau brand 
 def keranjang(nama_akun):
@@ -603,7 +692,7 @@ def keranjang(nama_akun):
         if  Pilihan_checkout == "y":
             #Percabangan jika len keranjang akun lebih kecil atau sama dengan 0 maka blok kode di bawah akan di jalankan
             if len(keranjang_akun) <= 0 :
-                #Menampilkan noted / peringatan dengan tabulate
+                #Menampilkan Noted / peringatan dengan tabulate
                 print(tabulate([["Keranjang Anda Kosong"]],tablefmt="double_grid"))
                 #Fungsi back to menu / pembatas
                 back_to_menu()
@@ -621,8 +710,12 @@ def keranjang(nama_akun):
             show_menu_user(nama_akun)
         #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
         else:
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Pilih y / n !!, Silahkan ulangi lagi\n"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi Checkout
 def check_out(nama_akun, keranjang_akun):
@@ -647,7 +740,7 @@ def check_out(nama_akun, keranjang_akun):
             if Transaksi == "y":
                 #Percabangan jika saldo user tidak cukup
                 if Login[nama_akun][1] < barang_checkout[1]:
-                    #Menampilkan noted / peringatan dengan tabulate
+                    #Menampilkan Noted / peringatan dengan tabulate
                     print(tabulate([["Noted : Saldo Tidak Cukup\n"]],tablefmt="double_grid"))
                     back_to_menu()
                     #Fungsi pembersih terminal 
@@ -670,7 +763,7 @@ def check_out(nama_akun, keranjang_akun):
                     show_menu_user(nama_akun)
             #Percabangan ketika user tidak ingin melanjutkan transaksi
             elif Transaksi =="n":
-                #Menampilkan noted / peringatan dengan tabulate
+                #Menampilkan Noted / peringatan dengan tabulate
                 print(tabulate([["Transaksi gagal"]],tablefmt="double_grid"))
                 #Fungsi back to menu / pembatas
                 back_to_menu()
@@ -678,12 +771,20 @@ def check_out(nama_akun, keranjang_akun):
                 show_menu_user(nama_akun)
             #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
             else:
-                #Menampilkan noted / peringatan dengan tabulate
+                #Menampilkan Noted / peringatan dengan tabulate
                 print(tabulate([["Noted : Pilih y / n !! Silahkan ulangi \n"]],tablefmt="double_grid"))
+                #Fungsi back to menu atau sebagai pembatas
+                back_to_menu()
+                #Fungsi pembersih terminal
+                clear_screen()
         #Percabangan ketika kondisi di atas tidak terpenuh maka blok kode di bawah akan di jalankan 
         else:
-            #Menampilkan noted / peringatan dengan tabulate
+            #Menampilkan Noted / peringatan dengan tabulate
             print(tabulate([["Noted : Masukan ID yang tertera pada keranjang , Silahkan ulangi dari awal\n"]],tablefmt="double_grid"))
+            #Fungsi back to menu atau sebagai pembatas
+            back_to_menu()
+            #Fungsi pembersih terminal
+            clear_screen()
 
 #Fungsi untuk display struk
 def display_struk(nama_akun,ID_checkout):
