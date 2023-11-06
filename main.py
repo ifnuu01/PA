@@ -261,7 +261,7 @@ def input_update():
             Harga          = int(input("Harga : Rp"))
             #Fungsi pembersi terminal
             clear_screen()
-            if Harga < 0:
+            if Harga < 0 or Ram < 0 or Storage < 0:
                 print(tabulate([["Noted : Inputan tidak valid silahkan mengulang \n"]],tablefmt="double_grid"))
                 #Fungsi back to menu atau sebagai pembatas
                 back_to_menu()
