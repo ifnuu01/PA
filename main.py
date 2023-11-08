@@ -15,30 +15,29 @@ def back_to_menu():
 
 #Fungsi login
 def auth_role():
-    gagal = 0
-    #Jika gagal login 3x maka while akan berhenti
-    while gagal < 3:
-        table = tabulate([["Menu Login \n"]],tablefmt="double_grid")
-        colored_table = colored(table, color_table, attrs=['bold'])
-        print(colored_table)
-        #variable username dan password untuk menampung inputan
-        username = input(f"{Fore.blue}Username : {Style.reset}")
-        password = input(f"{Fore.blue}password : {Style.reset}")
-        clear_screen()  
-        #Jika username dan password terdetect sebagai admin maka akan masuk ke menu admin
-        if username == "admin" and password == "admin":
-            show_menu_admin()
-        #Jika terdetect sebagai user maka masuk ke menu user
-        elif username in Login.keys() and password == Login[username][0]:
-            show_menu_user(username)
-        else:
-            #Jika username dan password tidak ada di dalam role user / admin maka variable gagal akan di tambah 1 sebagai pembatas perulangan
-            gagal += 1
-            print(tabulate([[f"{Fore.red}Noted :  Login gagal ke {gagal} , jika gagal login 3x maka akan di keluarkan ke menu awal{Style.reset}"]],tablefmt="double_grid"))
-            #Fungsi back to menu atau sebagai pembatas
-            back_to_menu()
-            #Fungsi pembersih terminal
-            clear_screen()
+    table = tabulate([["Menu Login \n"]],tablefmt="double_grid")
+    #Variable colored_table , memberikan warna pada table (table) dengan warna biru dalam variable color_table dengan atribut bold
+    colored_table = colored(table, color_table, attrs=['bold'])
+    
+    print(colored_table)
+    #variable username dan password untuk menampung inputan
+    username = input(f"{Fore.blue}Username : {Style.reset}")
+    password = input(f"{Fore.blue}password : {Style.reset}")
+    clear_screen()  
+    #Jika username dan password terdetect sebagai admin maka akan masuk ke menu admin
+    if username == "admin" and password == "admin":
+        show_menu_admin()
+    #Jika terdetect sebagai user maka masuk ke menu user
+    elif username in Login.keys() and password == Login[username][0]:
+        show_menu_user(username)
+    else:
+        print(tabulate([[f"{Fore.red}Noted :  Login gagal ,username atau password salah..{Style.reset}"]],tablefmt="double_grid"))
+        #Fungsi back to menu atau sebagai pembatas
+        back_to_menu()
+        #Fungsi pembersih terminal
+        clear_screen()
+        #Kembali ke menu awal
+        show_menu_awal()
 
 #Fungsi registrasi user
 def registrasi_user():
@@ -67,19 +66,19 @@ def show_menu_awal():
     #Perulangan yang di mana menu akan terus di ulang jika tidak sesuai dengan inputan
     while True:
         #Menampilkan menu-menu yang terdapat pada menu awal
-        tampilan = [["Login"],["Registrasi"],["Exit"]]
+        tampilan = [["Registrasi"],["Login"],["Exit"]]
         table = tabulate(tampilan,headers=["No","Selamat Datang di Toko Handphone"],tablefmt="mixed_grid",showindex=range(1,len(tampilan)+1))
         colored_table = colored(table, color_table, attrs=['bold'])
         print(colored_table)
         #Varible pilih sebagai penampung inputan
         pilih = input(f"{Fore.blue}Pilih Menu : {Style.reset}")
         clear_screen()
-        #Percabangan jika inputan pilih bernilai str 1 maka akan ke menu auth_role
+        #Percabangan jika inputan pilih bernilai str 1 maka akan ke menu registrasi_user
         if  pilih == "1":
-            auth_role()
-        #Jika inputan pilih bernilai str 2 maka akan ke menu Registrasi_useer
-        elif pilih == "2":
             registrasi_user()
+        #Jika inputan pilih bernilai str 2 maka akan ke menu auth_role
+        elif pilih == "2":
+            auth_role()
         #Jika inputan pilih bernilai str 3 maka memberhentikan program
         elif pilih == "3":
             print(tabulate([[f"{Fore.green}Terima kasih telah berkunjung{Style.reset}"]],tablefmt="double_grid"))
@@ -200,7 +199,9 @@ def list_handphone():
 def show_type(brand,name_brand,header):
     #Menampilkan table tipe hp dengan tabulate
     table2 = tabulate([[f"Daftar {name_brand}"]],tablefmt="double_grid")
+    #Variable colored_table2 , memberikan warna pada table (table2) dengan warna biru dalam variable color_table dengan atribut bold
     colored_table2 = colored(table2, color_table, attrs=['bold'])
+    
     print(colored_table2)
     table = tabulate(brand,headers=header,tablefmt="simple_grid",showindex=range(1,len(brand)+1))
     colored_table = colored(table, color_table, attrs=['bold'])
