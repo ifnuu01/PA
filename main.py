@@ -214,7 +214,7 @@ def add_handphone():
         #Menampilkan fungsi dari menu read
         menu_read()
         #variable brand sebagai penampung dari inputan user
-        Brand = input("Pilih brand yang mau di tambah : ")
+        Brand = input(f"{Fore.blue}Pilih brand yang mau di tambah : {Style.reset}")
         #Fungsi pembersi terminal
         clear_screen()
         #Percabangan dimana ketika inputan bernilai str 1 maka akan menjalankan program di bawah
@@ -836,7 +836,7 @@ def check_out(nama_akun, keranjang_akun):
 #Fungsi untuk display struk
 def display_struk(nama_akun,ID_checkout):
     #Membuat header untuk struk
-    header_table = [f"{Fore.green}Selamat Pembayaran Anda Berhasil{Style.reset  }"]
+    header_table = ["Selamat Pembayaran Anda Berhasil"]
     #Menyimpan data produk yang ingin di checkout dalam sebuah lisy
     table = [[f"Nama Produk   : {Login[nama_akun][2][ID_checkout-1][0]}"],[f"Total Harga   : Rp {Login[nama_akun][2][ID_checkout-1][1]}"]]
     #Menampilkan list dengan menggunakan tabel
