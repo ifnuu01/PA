@@ -50,7 +50,7 @@ Infinix = Database["Infinix"]
 Xiaomi = Database["Xiomi"]
 Oppo = Database["Oppo"]
 
-
+#Variable untuk warna 
 color_table = 'blue'
 color_table2 = 'yellow'
 color_table3 = "green"
