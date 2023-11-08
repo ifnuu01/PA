@@ -49,3 +49,8 @@ Samsung = Database["Samsung"]
 Infinix = Database["Infinix"]
 Xiaomi = Database["Xiomi"]
 Oppo = Database["Oppo"]
+
+
+color_table = 'blue'
+color_table2 = 'yellow'
+color_table3 = "green"
