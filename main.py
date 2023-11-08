@@ -726,7 +726,7 @@ def keranjang(nama_akun):
             #Percabangan jika len keranjang akun lebih kecil atau sama dengan 0 maka blok kode di bawah akan di jalankan
             if len(keranjang_akun) <= 0 :
                 #Menampilkan Noted / peringatan dengan tabulate
-                print(tabulate([[f"{Fore.red}Keranjang Anda Kosong{Style.reset}"]],tablefmt="double_grid"))
+                print(tabulate([[f"{Fore.red}Noted : Keranjang Anda Kosong{Style.reset}"]],tablefmt="double_grid"))
                 #Fungsi back to menu / pembatas
                 back_to_menu()
                 #Fungsi pembersih terminal
